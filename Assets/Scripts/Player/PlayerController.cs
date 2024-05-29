@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpForce;
-    public float specialJumpForce;
+    public float superJumpForce;
 
     public LayerMask groundLayerMask;
     public LayerMask jumpzoneLayerMask;
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if(IsJumpZone())
         {
-            rigidbody.AddForce(Vector2.up * specialJumpForce, ForceMode.Impulse);
+            rigidbody.AddForce(Vector2.up * superJumpForce, ForceMode.Impulse);
         }
     }
 
@@ -164,20 +164,10 @@ public class PlayerController : MonoBehaviour
 
     public void BuffSpeed(float additionalSpeed)
     {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-        }
-
         coroutine = StartCoroutine(IncreaseMoveSpeed(additionalSpeed));
     }
     public void BuffJump(float additionalJump)
     {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-        }
-
         coroutine = StartCoroutine(IncreaseJump(additionalJump));
     }
     private IEnumerator IncreaseMoveSpeed(float alpha)

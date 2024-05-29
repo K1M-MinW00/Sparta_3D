@@ -8,7 +8,7 @@ public class PlayerCondition : MonoBehaviour
 
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
-    Condition stamina { get { return uiCondition.stamina; } }
+    Condition carrots { get { return uiCondition.carrots; } }
 
     public float noHungerHealthDecay;
     public event Action<float> onBuff;
@@ -16,7 +16,7 @@ public class PlayerCondition : MonoBehaviour
     private void Update()
     {
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
-        stamina.Add(stamina.regenRate * Time.deltaTime);
+        
 
         if (hunger.curValue == 0.0f)
         {
@@ -42,5 +42,15 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
+    }
+
+    public void Pick()
+    {
+        carrots.Add(1f);
+    }
+
+    public void Drop()
+    {
+        carrots.Subtract(1f);
     }
 }

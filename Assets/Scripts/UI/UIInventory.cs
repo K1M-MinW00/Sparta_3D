@@ -69,6 +69,8 @@ public class UIInventory : MonoBehaviour
     public void AddItem()
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
+        if (data.displayName == "Carrot")
+            condition.Pick();
 
         if (data.canStack)
         {
@@ -99,6 +101,9 @@ public class UIInventory : MonoBehaviour
 
     public void ThrowItem(ItemData data)
     {
+        if (data.displayName == "Carrot")
+           condition.Drop();
+
         Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one));
     }
 
@@ -234,10 +239,5 @@ public class UIInventory : MonoBehaviour
         }
 
         UpdateUI();
-    }
-
-    public bool HasItem(ItemData item, int quantity)
-    {
-        return false;
     }
 }
