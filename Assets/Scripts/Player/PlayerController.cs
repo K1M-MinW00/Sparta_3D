@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +9,10 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpForce;
+    public float specialJumpForce;
+
     public LayerMask groundLayerMask;
+    public LayerMask jumpzoneLayerMask;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -23,6 +27,10 @@ public class PlayerController : MonoBehaviour
     public bool canLook = true;
 
     private Rigidbody rigidbody;
+    public Action inventory;
+
+
+    private Coroutine coroutine;
 
     private void Awake()
     {
@@ -32,6 +40,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        CharacterManager.Instance.Player.condition.onBuff += BuffSpeed;
+        CharacterManager.Instance.Player.condition.onBuff += BuffJump;
     }
 
     private void FixedUpdate()
@@ -79,6 +89,11 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
+
+        if(IsJumpZone())
+        {
+            rigidbody.AddForce(Vector2.up * specialJumpForce, ForceMode.Impulse);
+        }
     }
 
     void CameraLook()
@@ -94,15 +109,15 @@ public class PlayerController : MonoBehaviour
     {
         Ray[] rays = new Ray[4]
         {
-            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+            new Ray(transform.position + (transform.forward * 0.05f) + (transform.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.05f) + (transform.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.05f) + (transform.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.05f) +(transform.up * 0.05f), Vector3.down)
         };
 
         for (int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 0.2f, groundLayerMask))
             {
                 return true;
             }
@@ -110,10 +125,80 @@ public class PlayerController : MonoBehaviour
         
         return false;
     }
-
-    public void ToggleCursor(bool toggle)
+    bool IsJumpZone()
     {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.05f) + (transform.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.05f) + (transform.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.05f) + (transform.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.05f) +(transform.up * 0.05f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, jumpzoneLayerMask))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void OnInventoryButton(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void BuffSpeed(float additionalSpeed)
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(IncreaseMoveSpeed(additionalSpeed));
+    }
+    public void BuffJump(float additionalJump)
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(IncreaseJump(additionalJump));
+    }
+    private IEnumerator IncreaseMoveSpeed(float alpha)
+    {
+        float curSpeed = moveSpeed;
+
+        moveSpeed *= alpha;
+
+        yield return new WaitForSeconds(5f);
+
+        moveSpeed /= alpha;
+    }
+
+    private IEnumerator IncreaseJump(float alpha)
+    {
+        float curJumpPower= jumpForce;
+
+        jumpForce *= alpha;
+
+        yield return new WaitForSeconds(5f);
+
+        jumpForce /= alpha;
     }
 }
