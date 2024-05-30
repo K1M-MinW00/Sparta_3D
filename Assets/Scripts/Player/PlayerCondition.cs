@@ -25,7 +25,12 @@ public class PlayerCondition : MonoBehaviour
 
         if (health.curValue == 0.0f)
         {
-            Die();
+            GameManager.Instance.GameOver();
+        }
+
+        if(carrots.curValue == carrots.maxValue)
+        {
+            GameManager.Instance.EndGame();
         }
     }
 
@@ -37,11 +42,6 @@ public class PlayerCondition : MonoBehaviour
     public void Eat(float amount)
     {
         hunger.Add(amount);
-    }
-
-    public void Die()
-    {
-        Debug.Log("플레이어가 죽었다.");
     }
 
     public void Pick()

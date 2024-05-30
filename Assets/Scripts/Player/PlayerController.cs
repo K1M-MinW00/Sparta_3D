@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public float superJumpForce;
 
     public LayerMask groundLayerMask;
-    public LayerMask jumpzoneLayerMask;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -89,11 +88,6 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
-
-        if(IsJumpZone())
-        {
-            rigidbody.AddForce(Vector2.up * superJumpForce, ForceMode.Impulse);
-        }
     }
 
     void CameraLook()
@@ -125,25 +119,14 @@ public class PlayerController : MonoBehaviour
         
         return false;
     }
-    bool IsJumpZone()
+    
+
+    private void OnCollisionEnter(Collision collision)
     {
-        Ray[] rays = new Ray[4]
+        if(collision.gameObject.tag == "JumpZone")
         {
-            new Ray(transform.position + (transform.forward * 0.05f) + (transform.up * 0.05f), Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.05f) + (transform.up * 0.05f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.05f) + (transform.up * 0.05f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.05f) +(transform.up * 0.05f), Vector3.down)
-        };
-
-        for (int i = 0; i < rays.Length; i++)
-        {
-            if (Physics.Raycast(rays[i], 0.1f, jumpzoneLayerMask))
-            {
-                return true;
-            }
+            rigidbody.AddForce(Vector2.up * superJumpForce, ForceMode.Impulse);
         }
-
-        return false;
     }
 
     public void OnInventoryButton(InputAction.CallbackContext callbackContext)
@@ -155,7 +138,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ToggleCursor()
+    public void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;

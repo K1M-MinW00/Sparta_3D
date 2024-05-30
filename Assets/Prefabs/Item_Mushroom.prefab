@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1257606747385508793}
   - component: {fileID: 597624513260729035}
   - component: {fileID: 2004132972950025578}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Item_Mushroom
-  m_TagString: Untagged
+  m_TagString: JumpZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 1538557255908115528}
   - component: {fileID: 473133189664427149}
   - component: {fileID: 5771104401532041262}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Mushroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Banana
   description: So Sweet.
   type: 0
-  icon: {fileID: 21300000, guid: bf042615dbd125d49a3c2709f5813da3, type: 3}
+  icon: {fileID: 21300000, guid: 18b911e0093de2b43a60228bda2acbc3, type: 3}
   dropPrefab: {fileID: 7213089118407955081, guid: a78f9148d6c4e80438245f4dffb3c819, type: 3}
   canStack: 1
   maxStackAmount: 10

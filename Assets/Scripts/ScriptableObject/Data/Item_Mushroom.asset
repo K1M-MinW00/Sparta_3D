@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Mushroom
   description: Bounce Bounce
   type: 1
-  icon: {fileID: 21300000, guid: 1e855315affef8a49a936ae304aa5dd7, type: 3}
+  icon: {fileID: 21300000, guid: e2289d62969544241967dd7921093496, type: 3}
   dropPrefab: {fileID: 3414718744349902955, guid: 2a66abdc5ffad474faa0073d72ed5487, type: 3}
   canStack: 0
   maxStackAmount: 1

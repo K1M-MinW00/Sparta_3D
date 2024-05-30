@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Hamburger
   description: A hungry rabbit also eats hamburger.
   type: 0
-  icon: {fileID: 21300000, guid: f25bb862967d7204bb1c9a49814731a4, type: 3}
+  icon: {fileID: 21300000, guid: ccbeec8cadb6fdb488f4edf0e1b427d9, type: 3}
   dropPrefab: {fileID: 5405213796271209177, guid: 2cf42599c4a5e4749b6414a7c1e61cea, type: 3}
   canStack: 0
   maxStackAmount: 1
