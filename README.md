@@ -51,8 +51,9 @@ E 키를 통해 아이템과 상호작용,
 
 ### 1. Intro Scene
 게임 시작 전 화면 입니다.
+
 <details>
-  <summary> ▶ 시작 화면</summary>
+  <summary> 🐰 시작 화면</summary>
   <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/3ed8baeb-439d-466a-bdef-53c029f95e4f" width = 500>
 </details>
 
