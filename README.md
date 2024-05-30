@@ -4,7 +4,7 @@
 <br>
 
 ## 📂 프로젝트 소개
-Unity3D의 캐릭터 이동과 물리 처리를 구현한 1인칭 3D 프로젝트입니다.
+캐릭터 이동과 물리 처리를 구현한 1인칭 시점의 Unity 3D 프로젝트입니다.
 
 <br>
 
@@ -41,64 +41,72 @@ E 키를 통해 아이템과 상호작용,
 ### 점프대
 캐릭터가 버섯(점프대) 에 닿았을 때, onCollisionEnter 트리거와 ForceMode.Impulse 를 사용해 하늘을 향해 순간적인 힘을 가해줍니다.
 
+### 해와 달
+시간이 흐름에 따라, 해와 달이 번갈아가며 뜹니다.
+밤이 되면, 시야가 제한됩니다.
+
 <br>
 
 ## 🎬 플레이 화면
 
 ### 1. Intro Scene
-- 가장 먼저 보여지는 화면입니다.
-- **게임 시작 , 사운드 조절 , 나가기**, 3 가지 버튼이 있습니다.
-
+게임 시작 전 화면 입니다.
 <details>
-  <summary> 🎬 인트로 / 🔊 사운드 설정</summary>
-  <img src = "https://github.com/SnowScapes/DefendTheCastle/assets/122630746/f5706958-6cf5-4f22-8a4a-548b0eb3c4e2" width = 500>
+  <summary> ▶ 시작 화면</summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/3ed8baeb-439d-466a-bdef-53c029f95e4f" width = 500>
 </details>
 
 <br>
 
-### 2. Tutorial Scene
-- 기초 가이드를 제공하는 화면입니다.
-- **적들에 대한 정보, 게임 종료 조건, 아이템**에 대한 정보를 제공합니다.
-
-<details>
-  <summary> 📕 튜토리얼</summary>
-  <img src = "https://github.com/SnowScapes/DefendTheCastle/assets/122630746/0666a15a-a10e-4055-b049-57d3ab068896" width = 500>
-</details>
-
-<br>
-
-### 3. Main Scene
+### 2. Main Scene
 - 본격적인 게임 화면 입니다.
-- ⌨ W/A/S/D 키를 통해 캐릭터를 움직이고, 🖱 마우스 좌클릭을 통해 공격합니다.
-- 적을 처치하면 다양한 아이템이 드랍됩니다.
-- 상점을 통해 업그레이드를 진행할 수 있습니다.
-- 특수 기능을 통해, 쿨 타임마다 성을 수리할 수 있습니다.
+- 아빠 토끼가 되어, 아기 토끼들을 위해 7개의 당근을 찾아야 합니다. 맵에는 10개의 당근이 존재합니다.
+- ⌨ W/A/S/D 키를 통해 캐릭터를 움직이고, 🖱 마우스를 통해 시야를 움직일 수 있습니다.
+- Ray 를 통해, 바라보는 곳에 아이템이 있으면 아이템 정보를 알려줍니다.
+- 🥕 E 키를 눌러 아이템을 줍고, 👜 Tab 키를 눌러 인벤토리를 열 수 있습니다. 
+- 체력과 배고픔 시스템이 존재합니다. 배고픔이 0 이 되면, 체력이 감소하니 주의하세요.
+- 🍄 버섯 아이템을 통해 높게 점프할 수 있습니다.
+
 <details>
-  <summary> 🎮 플레이어 이동 / 💎 상점 </summary>
-  <img src = "https://github.com/SnowScapes/DefendTheCastle/assets/122630746/bb5403d4-b9f2-4148-a5cc-7dbd7bf5020c" width = 500>
+  <summary> 🎮 플레이어 이동 / 📃 아이템 정보 </summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/b1dc3eeb-5119-4c01-9160-10f2a365d5a3" width = 500>
 </details>
 
 <details>
-  <summary> 🏹 공격 / 🧟‍♂️ 적 / 🎁 아이템 </summary>
-  <img src = "https://github.com/SnowScapes/DefendTheCastle/assets/122630746/44b6d181-279c-467e-bba1-a9c870886c59" width = 500>
+  <summary> 🎁 아이템 사용 </summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/89c15779-36b3-4b62-9bad-272ba428d92e" width = 500>
 </details>
 
 <details>
-  <summary> 🛠 특수 기능 </summary>
-  <img src = "https://github.com/SnowScapes/DefendTheCastle/assets/122630746/48df322c-6a44-4617-83de-a662180585bf" width = 500>
+  <summary> 🌞 해와 달 🌚</summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/67e881a6-b6ad-4c1e-ae7c-7c10dd0c94c5" width = 500>
+</details>
+
+<details>
+  <summary> ☕ 버프 아이템 / 🍄 점프대 </summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/41254f2a-c974-401e-8053-2e343baf45c0" width = 500>
+</details>
+
+<br>
+
+### 3. GameOver Scene
+- 당근을 다 모으기 전, 체력이 0 이 되면 등장하는 장면입니다.
+- **다시하기 와 종료하기**, 2 가지 버튼이 있습니다.
+  
+<details>
+  <summary> 😢 게임 오버 </summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/a64cca45-c0f2-4e93-9943-38b3e474ff5a" width = 500>
 </details>
 
 <br>
 
 ### 4. End Scene
-- 게임 성공 또는 실패 시 이동하게 되는 화면입니다.
+- 당근을 다 모아, 게임을 클리어했을 때 등장하는 장면입니다.
 - **다시하기 와 종료하기**, 2 가지 버튼이 있습니다.
-- 점수 로직을 통해 계산한 점수를 표시해줍니다.
 
 <details>
-  <summary> 🖼 엔딩 씬/ 📊 점수 표시  </summary>
-  <img src = "https://github.com/SnowScapes/DefendTheCastle/assets/122630746/23ffcb75-2977-4525-80c4-632e6c65695b" width = 500>
-  <img src ="https://github.com/SnowScapes/DefendTheCastle/assets/122630746/ff3f3317-5296-40b7-a97b-84849023d77f" width = 500>
+  <summary> 😆 게임 클리어  </summary>
+  <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/edba346f-c9c6-477c-848c-94e319379e4b" width = 500>
 </details>
 
 <br>
