@@ -68,6 +68,7 @@ E 키를 통해 아이템과 상호작용,
 - 체력과 배고픔 시스템이 존재합니다. 배고픔이 0 이 되면, 체력이 감소하니 주의하세요.
 - 🍄 버섯 아이템을 통해 높게 점프할 수 있습니다.
 
+
 <details>
   <summary> 🎮 플레이어 이동 / 📃 아이템 정보 </summary>
   <img src = "https://github.com/K1M-MinW00/Sparta_3D/assets/122630746/b1dc3eeb-5119-4c01-9160-10f2a365d5a3" width = 500>
